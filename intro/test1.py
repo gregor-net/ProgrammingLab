@@ -45,4 +45,7 @@ print(elleva(2,4))
 print(elleva(2))
 help(elleva)
 
+pari2 = [n for n in range(11) if n%2==0]
+print(pari2)
+
      
