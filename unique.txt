@@ -1,30 +1,13 @@
 La programmazione è ovunque. Usi il telefono? Usi il computer? Usi l’auto? Navighi su internet? Guardi film? Dietro c’è codice. Dietro c’è Python. Uno dei linguaggi più usati è Python.
 
 Perché è speciale? Perché è facile. Perché è chiaro. Perché è semplice. La sintassi è chiara. La sintassi è naturale. Sembra di scrivere in italiano!
-
 È anche versatile. Vuoi creare app? Vuoi analizzare dati? Vuoi progettare giochi? Vuoi fare robotica? Con Python puoi! Con Python riesci!
-
 E la comunità? È grande. È attiva. È fantastica! Trovi aiuto. Trovi guide. Trovi supporto. Non sei mai solo.
-
 Python è il futuro. Python è ovunque. Sempre più aziende lo usano. Sempre più progetti lo scelgono. Inizia a impararlo ora!
-
-
 Python è potente.
 Python è semplice.
 Python è chiaro.
 Python è versatile.
-
-Python è potente.
-Python è semplice.
-Python è chiaro.
-Python è versatile.
-
-Python è potente.
-Python è semplice.
-Python è chiaro.
-Python è versatile.
-
-
 aaaa.
 aaaaaa
 aaaa.
