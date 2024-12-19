@@ -3,7 +3,7 @@ class CSVFile():
     def __init__(self,name):
         try:
             open(name)
-        except:
+        except FileNotFoundError:
             print("Errore: il file inserito non esiste!")
             exit()
         else:

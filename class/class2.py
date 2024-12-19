@@ -3,16 +3,13 @@ class CSVFile():
     def __init__(self,name):
         self.name = name
         
-        
     def __str__(self):
         return "CSV file name is: {}".format(self.name)
     
     def get_data(self, start = None, end = None):
         try:
-            self.start = start
-            self.end = end
-            file = open(self.name, 'r')
-            rows = file.readlines()
+            with open(self.name, 'r') as file:
+                rows = file.readlines()
             data = []
             if start is None:
                 start = 0
@@ -22,7 +19,7 @@ class CSVFile():
             if start > end:
                 raise IndexError("Index start is bigger than index end")
             
-            for i, row in enumerate(file):
+            for i, row in enumerate(rows):
                 if(i==0):
                     data.append(row.strip().split(","))
                 if(start > end):
@@ -30,7 +27,6 @@ class CSVFile():
                 if(start <= i):
                     data.append(row.strip().split(","))
                     start += 1
-                
             return data
         
         except FileNotFoundError:
@@ -44,8 +40,6 @@ class NumericalCSVFile(CSVFile):
         return "Numerical CSV file name is: {}".format(self.name)  
     
     def get_data(self, start = None, end = None):
-        self.start = start
-        self.end = end
         data = super().get_data(start, end)
         ndata = []
         for i, row in enumerate(data):
