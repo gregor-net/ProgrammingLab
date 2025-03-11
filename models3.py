@@ -6,7 +6,8 @@ class CSVFile():
             print("Errore: il file inserito non esiste!")
             exit()
         else:
-            self.name = name           
+            self.name = name  
+                     
     def __str__(self):
         return "CSV file name is: {}".format(self.name)
     
@@ -14,26 +15,24 @@ class CSVFile():
         self.start = start
         self.end = end
         if end is not None and start > end:
-            print("Error: Start is bigger than end!")
-            return []
+            raise ValueError('Start is bigger than end!')
+              
         file = open(self.name)
         testo = file.read()
         l1 = testo.split("\n")
+        end = len(l1)
         lista = []
-        for i, item in enumerate(l1):
-            if end is not None and start > end:
-                break
-            if(start <= i):
-                start += 1
-                if item != "":
-                    l2 = item.split(',')
-                    if l2[0] != 'Date':
-                        try:
-                            l2[1] = float(l2[1])
-                        except ValueError:
-                            print(f"Skipping non-numeric value: {l2[1]}")
-                        else:
-                            lista.append(l2[1])
+        for item in l1[start:end]:
+            if item != "":
+                l2 = item.split(',')
+                if l2[0] != 'Date':
+                    try:
+                        l2[1] = float(l2[1])
+                    except ValueError:
+                        print(f"Skipping non-numeric value: {l2[1]}")
+                    else:
+                        lista.append(l2[1])
+            start += 1
         file.close()
         return lista
     
@@ -48,7 +47,7 @@ class TrendModel(Model):
         self.window = window
         
         
-    def compute_avg_variation(self,data):
+    def avg_variation(self,data):
         prev_value = None
         variazioni = []
         
@@ -65,7 +64,7 @@ class TrendModel(Model):
         return media_var
         
     def predict(self, data):
-        prediction = data[-1] + self.compute_avg_variation(data)
+        prediction = data[-1] + self.avg_variation(data)
         return prediction
     
 class FitTrendModel(TrendModel):
@@ -73,10 +72,10 @@ class FitTrendModel(TrendModel):
         super().__init__(window)
        
     def fit(self, data):
-        self.historical_avg_variation  = super().compute_avg_variation(data)
+        self.historical_avg_variation  = super().avg_variation(data)
     
     def predict(self, data):
-        prediction = data[-1] + (self.compute_avg_variation(data) + self.historical_avg_variation) / 2
+        prediction = data[-1] + (self.avg_variation(data) + self.historical_avg_variation) / 2
         return prediction
 
     
@@ -89,9 +88,14 @@ modello3 = TrendModel()
 
 file = CSVFile("shampoo_sales.csv")
 print(file)
-test_data3 = file.get_data()
-print(test_data2)
+
+
+test_data3 = file.get_data(2, 1)  
 print(test_data3)
+
+predizione3 = modello3.predict(test_data3)
+print(predizione3)
+
 
 predizione = modello.predict(test_data)
 print(predizione)
@@ -99,7 +103,7 @@ modello2.fit(test_data2)
 predizione2 = modello2.predict(test_data)
 print(predizione2)
 
-predizione3 = modello3.predict(test_data3)
-print(predizione3)
+
+
     
     

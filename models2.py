@@ -8,7 +8,7 @@ class TrendModel(Model):
     def __init__(self, window = 3):
         self.window = window
         
-    def compute_avg_variation(self,data):
+    def avg_variation(self,data):
         prev_value = None
         variazioni = []
         
@@ -25,16 +25,16 @@ class TrendModel(Model):
         return media_var
         
     def predict(self, data):
-        prediction = data[-1] + self.compute_avg_variation(data)
+        prediction = data[-1] + self.avg_variation(data)
         return prediction
     
 class FitTrendModel(TrendModel):
        
     def fit(self, data):
-        self.historical_avg_variation  = super().compute_avg_variation(data)
+        self.historical_avg_variation  = super().avg_variation(data)
     
     def predict(self, data):
-        prediction = data[-1] + (self.compute_avg_variation(data) + self.historical_avg_variation) / 2
+        prediction = data[-1] + (self.avg_variation(data) + self.historical_avg_variation) / 2
         return prediction
 
     
