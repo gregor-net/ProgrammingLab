@@ -6,7 +6,7 @@ class TrendModel():
         for item in data:
             if prev_data is not None:
                 prediction += item - prev_data 
-            prev_data = item
+                prev_data = item
         prediction /= len(data) -1
         prediction += data[-1]
         return prediction
